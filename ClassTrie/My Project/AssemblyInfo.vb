@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("ClassTrie")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyTitle("ClassTrie")>
+<Assembly: AssemblyDescription("Basic Trie Tree data structure (Alphabetical)")>
+<Assembly: AssemblyCompany("SpydazWeb")>
 <Assembly: AssemblyProduct("ClassTrie")> 
-<Assembly: AssemblyCopyright("Copyright ©  2018")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyCopyright("Copyright ©  2018")>
+<Assembly: AssemblyTrademark("TM ©  2018")>
 
 <Assembly: ComVisible(False)>
 
