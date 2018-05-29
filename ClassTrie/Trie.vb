@@ -1,4 +1,4 @@
-﻿Public Module TrieTree
+﻿Public Module Trees
     ''' <summary>
     ''' Each Set of Nodes has only 26 ID's ID 0 = stop
     ''' </summary>
@@ -37,7 +37,7 @@
             Children = New List(Of TrieNode)
             Level = mLevel
         End Sub
-        Public Shared Function MakeTrieTree() As TrieNode
+        Private Shared Function MakeTrieTree() As TrieNode
             Dim tree As New TrieNode(0)
 
             tree.NodeData = "Root"
@@ -58,7 +58,7 @@
         ''' <param name="Node">nNode to add the new node to. 
         ''' </param>
         ''' <param name="NodeData">Character to be added</param>
-        Public Shared Function CreateNode(ByRef NodeData As String, ByRef Level As Integer) As TrieNode
+        Private Shared Function CreateNode(ByRef NodeData As String, ByRef Level As Integer) As TrieNode
 
             'Create node - 2
             Dim NewNode As New TrieNode(Level)
@@ -139,9 +139,10 @@
         ''' <summary>
         ''' checks if node exists in child nodes
         ''' </summary>
+        ''' <param name="node">node with childnodes </param>
         ''' <param name="Nodedata">Char string</param>
         ''' <returns></returns>
-        Public Shared Function CheckNodeExists(ByRef Children As List(Of TrieNode), ByRef Nodedata As String) As Boolean
+        Private Shared Function CheckNodeExists(ByRef Children As List(Of TrieNode), ByRef Nodedata As String) As Boolean
             'Check node does not exist
             Dim found As Boolean = False
             For Each mNode As TrieNode In Children
@@ -152,7 +153,7 @@
             Next
             Return found
         End Function
-        Public Shared Function GetNode(ByRef Tree As List(Of TrieNode), ByRef NodeData As String) As TrieNode
+        Private Shared Function GetNode(ByRef Tree As List(Of TrieNode), ByRef NodeData As String) As TrieNode
             Dim Foundnode As New TrieNode
             For Each item In Tree
                 If item.NodeData = NodeData Then
@@ -162,7 +163,7 @@
             Next
             Return Foundnode
         End Function
-        Public Shared Function HasChildren(ByRef Node As TrieNode) As Boolean
+        Private Shared Function HasChildren(ByRef Node As TrieNode) As Boolean
             Return If(Node.Children IsNot Nothing, True, False)
         End Function
 
@@ -173,7 +174,7 @@
         ''' <param name="ChrStr">String to be added </param>
         ''' <param name="CharPos">this denotes the level of the node</param>
         ''' <returns></returns>
-        Public Shared Function AddCharToTrie(ByRef CurrentNode As TrieNode, ByRef ChrStr As String, ByRef CharPos As Integer) As TrieNode
+        Private Shared Function AddCharToTrie(ByRef CurrentNode As TrieNode, ByRef ChrStr As String, ByRef CharPos As Integer) As TrieNode
             'start of tree
 
             Dim Text As String = ChrStr
@@ -207,7 +208,7 @@
 
             Return returnNode
         End Function
-        Public Shared Function AddString(ByRef Tree As TrieNode, Str As String) As TrieNode
+        Private Shared Function AddString(ByRef Tree As TrieNode, Str As String) As TrieNode
             Dim curr As TrieNode = Tree
             Dim Pos As Integer = 0
             For Each chr As Char In Str
@@ -217,20 +218,82 @@
             curr = TrieNode.AddCharToTrie(curr, "StopChar", Pos + 1)
             Return Tree
         End Function
+        ''' <summary>
+        ''' Returns true if string is contined in trie (prefix) not as Word
+        ''' </summary>
+        ''' <param name="tree"></param>
+        ''' <param name="Str"></param>
+        ''' <returns></returns>
+        Public Shared Function CheckPrefix(ByRef tree As TrieNode, ByRef Str As String) As Boolean
+            Dim CurrentNode As TrieNode = tree
+            Dim found As Boolean = False
+
+            Dim Pos As Integer = 0
+            For Each chrStr As Char In Str
+                Pos += 1
+
+
+                'Check Chars
+                If TrieNode.CheckNodeExists(CurrentNode.Children, chrStr) = True Then
+                    CurrentNode = TrieNode.GetNode(CurrentNode.Children, chrStr)
+                    found = True
+                Else
+                    found = False
+                End If
+            Next
+            Return found
+        End Function
+        ''' <summary>
+        ''' Returns true if Word is found in trie
+        ''' </summary>
+        ''' <param name="tree"></param>
+        ''' <param name="Str"></param>
+        ''' <returns></returns>
+        Public Shared Function CheckWord(ByRef tree As TrieNode, ByRef Str As String) As Boolean
+            Dim CurrentNode As TrieNode = tree
+            Dim found As Boolean = False
+            'Position in Characterstr
+            Dim Pos As Integer = 0
+            For Each chrStr As Char In Str
+                Pos += 1
+
+
+                'Check Chars
+                If TrieNode.CheckNodeExists(CurrentNode.Children, chrStr) = True Then
+                    CurrentNode = TrieNode.GetNode(CurrentNode.Children, chrStr)
+                    found = True
+                Else
+                    'Terminated before end of Word
+                    found = False
+                End If
+            Next
+
+            'Check for end of word marker
+            If found = True Then
+                Return TrieNode.CheckNodeExists(CurrentNode.Children, "StopChar") = True
+            End If
+
+
+
+        End Function
+        Public Function Create() As TrieNode
+            Return TrieNode.MakeTrieTree()
+        End Function
+        Public Function Insert(ByRef tree As TrieNode, ByRef Str As String) As TrieNode
+            Return TrieNode.AddString(tree, Str)
+        End Function
+        Public Function FindPrefix(ByRef tree As TrieNode, ByRef Str As String) As Boolean
+
+            Return TrieNode.CheckPrefix(tree, Str)
+        End Function
+        Public Function FindWord(ByRef tree As TrieNode, ByRef Str As String) As Boolean
+            Return TrieNode.CheckWord(tree, Str)
+        End Function
     End Structure
 
-    'Example form (Input/Output textbox and execute button)
 
-    Function Create() As TrieNode
-        Return TrieNode.MakeTrieTree()
-    End Function
-    Function Insert(ByRef tree As TrieNode, ByRef Str As String) As TrieNode
-        Return TrieNode.AddString(tree, Str)
-    End Function
+
     Function Delete(ByRef tree As TrieNode, ByRef Str As String) As TrieNode
         Return tree
-    End Function
-    Function Find(ByRef tree As TrieNode, ByRef Str As String) As Boolean
-        Return False
     End Function
 End Module
