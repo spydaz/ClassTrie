@@ -30,3 +30,9 @@ Saved as STRUCTURE;
 Note To extend This structure (just update the CharID to accomodate NewStringID, as well as Update ADD Function)
 
 Probably the NodeID Pointer can be removed (Not Req)
+
+Project build 1 was as class library (for Sharing)
+Project build 2 was as EXE (for testing) 
+Built With .net 4.52
+
+
