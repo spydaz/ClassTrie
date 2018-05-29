@@ -17,12 +17,13 @@ This will be it!
 
 WORKING!!
 
-Insert function 
-FindPrefix function
-FindWord Function 
-CreateTrie Function 
-ToString Function (displays contents of tree in report form)
-ToView Function (displays Contents of Tree in TreeviewControl)
+Insert function;
+
+FindPrefix function;
+FindWord Function; 
+CreateTrie Function; 
+ToString Function (displays contents of tree in report form);
+ToView Function (displays Contents of Tree in TreeviewControl);
 
 
 Saved as STRUCTURE; 
