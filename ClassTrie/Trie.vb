@@ -1,6 +1,4 @@
-﻿Imports System.Windows.forms
-
-Public Module Trees
+﻿Public Module Trees
 
     Public Structure TrieNode
         ''' <summary>
@@ -383,12 +381,11 @@ Public Module Trees
         ''' <returns></returns>
         Public Function ToView() As System.Windows.Forms.TreeNode
             Dim nde As New System.Windows.Forms.TreeNode
-            nde.Text = Me.NodeData.ToString
+            nde.Text = Me.NodeData.ToString.ToUpper & vbNewLine &
+                "(" & Me.Level & ")" & vbNewLine
 
             For Each child In Me.Children
                 nde.Nodes.Add(child.ToView)
-
-
 
             Next
 
