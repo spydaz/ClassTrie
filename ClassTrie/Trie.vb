@@ -289,6 +289,20 @@
         Public Function FindWord(ByRef tree As TrieNode, ByRef Str As String) As Boolean
             Return TrieNode.CheckWord(tree, Str)
         End Function
+
+        Public Overrides Function ToString() As String
+            Dim Str As String = "NodeID " & Me.NodeID.ToString & vbNewLine &
+            "Data: " & Me.NodeData & vbNewLine &
+            "Node Level: " & Level & vbNewLine
+
+
+            For Each child In Me.Children
+                Str = +"Child: " & child.ToString()
+            Next
+
+
+            Return Str
+        End Function
     End Structure
 
 
