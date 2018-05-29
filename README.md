@@ -15,9 +15,18 @@ I was searching for a method to combine various conversation trees; into a singl
 
 This will be it!
 
-A delete function needs to be added!
-Prefix search and Word search has been added!
-Add Function Working;
-Privatize functions Simplfy Access (create / Add / Find)
+WORKING!!
 
-Needs toString to be ADDED
+Insert function 
+FindPrefix function
+FindWord Function 
+CreateTrie Function 
+ToString Function (displays contents of tree in report form)
+ToView Function (displays Contents of Tree in TreeviewControl)
+
+
+Saved as STRUCTURE; 
+
+Note To extend This structure (just update the CharID to accomodate NewStringID, as well as Update ADD Function)
+
+Probably the NodeID Pointer can be removed (Not Req)
