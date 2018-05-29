@@ -1,38 +1,41 @@
-﻿Public Module Trees
-    ''' <summary>
-    ''' Each Set of Nodes has only 26 ID's ID 0 = stop
-    ''' </summary>
-    Public Enum CharID
-        StartChar = 0
-        a = 1
-        b
-        c
-        d
-        e
-        f
-        g
-        h
-        i
-        j = 10
-        k
-        l
-        m = 13
-        n = 14
-        o
-        p
-        q
-        r
-        s
-        t
-        u
-        v
-        w
-        x
-        y
-        z = 26
-        StopChar = 27
-    End Enum
+﻿Imports System.Windows.forms
+
+Public Module Trees
+
     Public Structure TrieNode
+        ''' <summary>
+        ''' Each Set of Nodes has only 26 ID's ID 0 = stop
+        ''' </summary>
+        Public Enum CharID
+            StartChar = 0
+            a = 1
+            b = 2
+            c = 3
+            d = 4
+            e = 5
+            f = 6
+            g = 7
+            h = 8
+            i = 9
+            j = 10
+            k = 11
+            l = 12
+            m = 13
+            n = 14
+            o = 15
+            p = 16
+            q = 17
+            r = 18
+            s = 19
+            t = 20
+            u = 21
+            v = 22
+            w = 23
+            x = 24
+            y = 25
+            z = 26
+            StopChar = 27
+        End Enum
         Public Sub New(ByRef mLevel As Integer)
             Children = New List(Of TrieNode)
             Level = mLevel
@@ -150,6 +153,39 @@
             Next
             Return found
         End Function
+        ''' <summary>
+        ''' Checks if Character exists in children of given Sibling List
+        ''' </summary>
+        ''' <param name="Children"></param>
+        ''' <param name="LocChar"></param>
+        ''' <returns></returns>
+        Public Shared Function CheckCharExists(ByRef Children As List(Of TrieNode), ByRef LocChar As String) As Boolean
+            'Check node does not exist
+            Dim found As Boolean = False
+            For Each mNode As TrieNode In Children
+                If mNode.NodeData = LocChar Then
+                    found = True
+                Else
+                End If
+            Next
+            Return found
+        End Function
+        ''' <summary>
+        ''' Checks if Character exists in children of node
+        ''' </summary>
+        ''' <param name="LocChar"></param>
+        ''' <returns></returns>
+        Public Function CheckCharExists(ByRef LocChar As String) As Boolean
+            'Check node does not exist
+            Dim found As Boolean = False
+            For Each mNode As TrieNode In Me.Children
+                If mNode.NodeData = LocChar Then
+                    found = True
+                Else
+                End If
+            Next
+            Return found
+        End Function
         Private Shared Function GetNode(ByRef Tree As List(Of TrieNode), ByRef NodeData As String) As TrieNode
             Dim Foundnode As New TrieNode
             For Each item In Tree
@@ -160,10 +196,21 @@
             Next
             Return Foundnode
         End Function
-        Private Shared Function HasChildren(ByRef Node As TrieNode) As Boolean
+        ''' <summary>
+        ''' Checks if given node has children 
+        ''' </summary>
+        ''' <param name="Node"></param>
+        ''' <returns></returns>
+        Public Shared Function HasChildren(ByRef Node As TrieNode) As Boolean
             Return If(Node.Children IsNot Nothing, True, False)
         End Function
-
+        ''' <summary>
+        ''' Checks if node Has children
+        ''' </summary>
+        ''' <returns></returns>
+        Public Function HasChildren() As Boolean
+            Return If(Me.Children IsNot Nothing, True, False)
+        End Function
         ''' <summary>
         ''' Adds char to Node(children) Returning the child
         ''' </summary>
@@ -205,7 +252,13 @@
 
             Return returnNode
         End Function
-        Private Shared Function AddString(ByRef Tree As TrieNode, Str As String) As TrieNode
+        ''' <summary>
+        ''' Adds string to given trie
+        ''' </summary>
+        ''' <param name="Tree"></param>
+        ''' <param name="Str"></param>
+        ''' <returns></returns>
+        Public Shared Function AddString(ByRef Tree As TrieNode, Str As String) As TrieNode
             Dim curr As TrieNode = Tree
             Dim Pos As Integer = 0
             For Each chr As Char In Str
@@ -271,19 +324,45 @@
 
 
         End Function
+        ''' <summary>
+        ''' Creates a trie
+        ''' </summary>
+        ''' <returns></returns>
         Public Function Create() As TrieNode
             Return TrieNode.MakeTrieTree()
         End Function
+        ''' <summary>
+        ''' Insert String into trie
+        ''' </summary>
+        ''' <param name="tree"></param>
+        ''' <param name="Str"></param>
+        ''' <returns></returns>
         Public Function Insert(ByRef tree As TrieNode, ByRef Str As String) As TrieNode
             Return TrieNode.AddString(tree, Str)
         End Function
+        ''' <summary>
+        ''' Checks if PRefix is in trie
+        ''' </summary>
+        ''' <param name="tree"></param>
+        ''' <param name="Str"></param>
+        ''' <returns></returns>
         Public Function FindPrefix(ByRef tree As TrieNode, ByRef Str As String) As Boolean
 
             Return TrieNode.CheckPrefix(tree, Str)
         End Function
+        ''' <summary>
+        ''' Checks if word is in trie
+        ''' </summary>
+        ''' <param name="tree"></param>
+        ''' <param name="Str"></param>
+        ''' <returns></returns>
         Public Function FindWord(ByRef tree As TrieNode, ByRef Str As String) As Boolean
             Return TrieNode.CheckWord(tree, Str)
         End Function
+        ''' <summary>
+        ''' Displays Contents of trie
+        ''' </summary>
+        ''' <returns></returns>
         Public Overrides Function ToString() As String
             Dim wrd As String = ""
             Dim Str As String = "NodeID " & Me.NodeID.ToString & vbNewLine &
@@ -298,6 +377,10 @@
             Return Str
 
         End Function
+        ''' <summary>
+        ''' Returns a TreeViewControl with the Contents of the Trie:
+        ''' </summary>
+        ''' <returns></returns>
         Public Function ToView() As System.Windows.Forms.TreeNode
             Dim nde As New System.Windows.Forms.TreeNode
             nde.Text = Me.NodeData.ToString
@@ -312,10 +395,32 @@
             Return nde
 
         End Function
+        ''' <summary>
+        ''' Inserts a string into the trie
+        ''' </summary>
+        ''' <param name="Str"></param>
+        ''' <returns></returns>
+        Public Function Insert(ByRef Str As String) As TrieNode
+            Return TrieNode.AddString(Me, Str)
+        End Function
+        ''' <summary>
+        ''' Returns true if String is found as a prefix in trie
+        ''' </summary>
+        ''' <param name="Str"></param>
+        ''' <returns></returns>
+        Public Function FindPrefix(ByRef Str As String) As Boolean
+
+            Return TrieNode.CheckPrefix(Me, Str)
+        End Function
+        ''' <summary>
+        ''' Returns true if string is found as word in trie
+        ''' </summary>
+        ''' <param name="Str"></param>
+        ''' <returns></returns>
+        Public Function FindWord(ByRef Str As String) As Boolean
+            Return TrieNode.CheckWord(Me, Str)
+        End Function
     End Structure
-
-
-
     Function Delete(ByRef tree As TrieNode, ByRef Str As String) As TrieNode
         Return tree
     End Function
