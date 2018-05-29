@@ -55,8 +55,6 @@
         ''' If node does not exist in child node set it is added 
         ''' if node already exists then no node is added a node ID is generated
         ''' </summary>
-        ''' <param name="Node">nNode to add the new node to. 
-        ''' </param>
         ''' <param name="NodeData">Character to be added</param>
         Private Shared Function CreateNode(ByRef NodeData As String, ByRef Level As Integer) As TrieNode
 
@@ -139,7 +137,6 @@
         ''' <summary>
         ''' checks if node exists in child nodes
         ''' </summary>
-        ''' <param name="node">node with childnodes </param>
         ''' <param name="Nodedata">Char string</param>
         ''' <returns></returns>
         Private Shared Function CheckNodeExists(ByRef Children As List(Of TrieNode), ByRef Nodedata As String) As Boolean
@@ -269,9 +266,7 @@
             Next
 
             'Check for end of word marker
-            If found = True Then
-                Return TrieNode.CheckNodeExists(CurrentNode.Children, "StopChar") = True
-            End If
+            Return If(found = True, TrieNode.CheckNodeExists(CurrentNode.Children, "StopChar") = True, False)
 
 
 
@@ -289,19 +284,33 @@
         Public Function FindWord(ByRef tree As TrieNode, ByRef Str As String) As Boolean
             Return TrieNode.CheckWord(tree, Str)
         End Function
-
         Public Overrides Function ToString() As String
+            Dim wrd As String = ""
             Dim Str As String = "NodeID " & Me.NodeID.ToString & vbNewLine &
             "Data: " & Me.NodeData & vbNewLine &
-            "Node Level: " & Level & vbNewLine
+            "Node Level: " & Level.ToString & vbNewLine
+            For Each child In Me.Children
+                Str &= "Child: " & child.ToString()
 
+
+
+            Next
+            Return Str
+
+        End Function
+        Public Function ToView() As System.Windows.Forms.TreeNode
+            Dim nde As New System.Windows.Forms.TreeNode
+            nde.Text = Me.NodeData.ToString
 
             For Each child In Me.Children
-                Str = +"Child: " & child.ToString()
+                nde.Nodes.Add(child.ToView)
+
+
+
             Next
 
+            Return nde
 
-            Return Str
         End Function
     End Structure
 
