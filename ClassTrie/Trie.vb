@@ -704,6 +704,9 @@ Public Class BinaryTree
 
         'Root
         Prnt &= "Node :" & Me.Data & vbNewLine
+        Dim nde As New System.Windows.Forms.TreeNode
+        nde.Text = "Node :" & Me.Data & vbNewLine
+        Tree.Nodes.Add(nde)
     End Sub
 
     ''' <summary>
@@ -712,6 +715,9 @@ Public Class BinaryTree
     Public Sub PrintPreOrder()
         'Root
         Prnt &= "Node :" & Me.Data & vbNewLine
+        Dim nde As New System.Windows.Forms.TreeNode
+        nde.Text = "Node :" & Me.Data & vbNewLine
+        Tree.Nodes.Add(nde)
         'Right nodes
         If Right IsNot Nothing Then
             Right.PrintInOrder()
