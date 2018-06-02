@@ -680,6 +680,9 @@ Public Class BinaryTree
         End If
 
         Prnt &= "Node :" & Me.Data & vbNewLine
+        Dim nde As New System.Windows.Forms.TreeNode
+        nde.Text = "Node :" & Me.Data & vbNewLine
+        Tree.Nodes.Add(nde)
         If Right IsNot Nothing Then
             Right.PrintInOrder()
         End If
@@ -718,9 +721,17 @@ Public Class BinaryTree
             Left.PrintInOrder()
         End If
     End Sub
-
-    Private PRN As String = ""
-
+    ''' <summary>
+    ''' String Tree
+    ''' </summary>
+    Public PRN As String = ""
+    ''' <summary>
+    ''' TreeControl Tree (once tree has been printed then the view Will Be populated)
+    ''' </summary>
+    Public Tree As System.Windows.Forms.TreeView
+    ''' <summary>
+    ''' Data to be held in Node
+    ''' </summary>
     Public Data As Integer
     Public Left As BinaryTree
     Public Right As BinaryTree
