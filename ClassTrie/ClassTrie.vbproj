@@ -43,7 +43,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ClassTrie.Form1</StartupObject>
+    <StartupObject>ClassTrie.FrmTrieTest</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -69,10 +69,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="FrmTrieTest.designer.vb">
+      <DependentUpon>FrmTrieTest.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="FrmTrieTest.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Trie.vb" />
@@ -93,8 +93,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="FrmTrieTest.resx">
+      <DependentUpon>FrmTrieTest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
