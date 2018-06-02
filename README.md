@@ -39,4 +39,16 @@ _Project build 1 was as class library (for Sharing)_
 _Project build 2 was as EXE (for testing) _
 _Built With .net 4.52_
 
+**02/06/2018
+Updated Trie to Tree (Universal Tree)
+Function ADD / Find Prefix / Find Word / CountWords / Count Node - StopChar nodes / Find Lowest Node - StopChar**
+
+NEEDS - DELETE WORD CMD - 
+
+**Universal Tree -**
+ can also Hold Data at nodes using an Alphabetical Tree.....
+To be Added.
+ **(Input Data @ StopChar)(GetData From StopChar)**
+Then Given a CharacterString Address (Data can be Added or Removed or located) Searching Should be done Via CharacterString (Not Data) or GetNode @ CharString Address (Edit/Remove)
+
 
