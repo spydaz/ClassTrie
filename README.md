@@ -52,3 +52,6 @@ To be Added.
 Then Given a CharacterString Address (Data can be Added or Removed or located) Searching Should be done Via CharacterString (Not Data) or GetNode @ CharString Address (Edit/Remove)
 
 
+**ADDED BINARY TREE**
+POSTORDER / PREORDER TRAVERSAL / INSERT / CONTAINS 
+**ADDED EXTENSIONS FOR TREENODE OPERATONS)**
