@@ -4,13 +4,10 @@ Public Class FrmTrieTest
     Dim MyTree As New TreeNode
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        MyTree.Insert(TextBox2.Text)
-
-        TextBox1.AppendText("Added : " & TextBox2.Text.ToUpper & vbNewLine)
         TreeView1.Nodes.Clear()
+        MyTree.Insert(TextBox2.Text)
+        TextBox1.AppendText("Added : " & TextBox2.Text.ToUpper & vbNewLine)
         TreeView1.Nodes.Add(MyTree.ToView())
-
-
         TextBox2.Clear()
     End Sub
 
@@ -21,6 +18,7 @@ Public Class FrmTrieTest
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         TextBox1.Clear()
+        TreeView1.Nodes.Clear()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -28,7 +26,7 @@ Public Class FrmTrieTest
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        TextBox1.AppendText(TextBox2.Text & ": " & MyTree.FindPrefix(TextBox2.Text))
+        TextBox1.AppendText(TextBox2.Text & ": " & MyTree.FindPrefix(TextBox2.Text) & vbNewLine)
     End Sub
 
     Private Sub ButtonDepth_Click(sender As Object, e As EventArgs) Handles ButtonDepth.Click
@@ -41,5 +39,17 @@ Public Class FrmTrieTest
 
     Private Sub ButtonCountWords_Click(sender As Object, e As EventArgs) Handles ButtonCountWords.Click
         TextBox1.AppendText("Number of Words :" & MyTree.CountWords(0) & vbNewLine)
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        TreeView1.Nodes.Clear()
+        MyTree.AddWord(TextBox2.Text)
+
+        TextBox1.AppendText("Added iteratively : " & TextBox2.Text.ToUpper & vbNewLine)
+        TreeView1.Nodes.Clear()
+        TreeView1.Nodes.Add(MyTree.ToView())
+
+
+        TextBox2.Clear()
     End Sub
 End Class
