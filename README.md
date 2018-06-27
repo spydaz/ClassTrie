@@ -60,3 +60,6 @@ POSTORDER / PREORDER TRAVERSAL / INSERT / CONTAINS
 ** ADDWORD ... Adds word iteratively ie: carpet/arpet/rpet/pet/et/t    WORKING **;
 <<<<< Contains all possible prefixes in tree from word ** WORKING **;
 Various methods counting Nodes / find deepest nodes / Count Prefixs in tree / CountWords in Tree /  ** WORKING **;
+
+*ADDED ::: Add Sentence To TRIE: Breaks sentence into words adding each word to the trie ; 
+Sentences can be added as a single branch or as iterative branch "The cat sat on the mat", "cat sat on the mat", "sat on the mat", "on the mat", "the mat", "Mat".*
