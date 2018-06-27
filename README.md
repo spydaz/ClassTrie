@@ -56,6 +56,7 @@ Then Given a CharacterString Address (Data can be Added or Removed or located) S
 POSTORDER / PREORDER TRAVERSAL / INSERT / CONTAINS 
 **ADDED EXTENSIONS FOR TREENODE OPERATONS)**
 
-**UPDATES : TO BE COMMITED **
-ADDWORD ... Adds word iteratively ie: carpet/arpet/rpet/pet/et/t     <<<<< Contains all possible prefixes in tree from word
-Various methods counting Nodes / find deepest nodes / Count Prefixs in tree / CountWords in Tree / 
+**UPDATES COMMITED **;
+** ADDWORD ... Adds word iteratively ie: carpet/arpet/rpet/pet/et/t    WORKING **;
+<<<<< Contains all possible prefixes in tree from word ** WORKING **;
+Various methods counting Nodes / find deepest nodes / Count Prefixs in tree / CountWords in Tree /  ** WORKING **;
