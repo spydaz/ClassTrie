@@ -47,45 +47,250 @@ Public Structure TreeNode
         StopChar = 27
     End Enum
 
-    Public Function GetUsage() As String
-        Return " Dim SearchWord As String = ""
-            'CreateTre
-            Dim MyTree As New AI_TOOLS.Tools.TreeNode
-            MyTree = MyTree.Create
-            'AddWord
-            MyTree.Insert(SearchWord)
-            'Find
-
-            MyTree.FindWord(SearchWord)
-            MyTree.FindPrefix(SearchWord)
-            'Results
-            Dim DeepestNode = MyTree.LowestLevel - 1
-            Dim NumberofWords = MyTree.CountWords(0)
-            Dim NumberofNodes = MyTree.CountNodes(0) - MyTree.CountWords(0)"
-    End Function
+#Region "Add"
 
     ''' <summary>
-    ''' AddIteratively
+    ''' Add characters Iteratively
+    ''' CAT
+    ''' AT
+    ''' T
     ''' </summary>
     ''' <param name="Word"></param>
     ''' <param name="TrieTree"></param>
-    Public Function AddWord(TrieTree As TreeNode, ByRef Word As String) As TreeNode
-
+    Public Function AddItterativelyByWord(TrieTree As TreeNode, ByRef Word As String) As TreeNode
         'AddWord
-        For i = 1 To Word.Length
-            TrieTree.Insert(Word)
-            Word = Word.Remove(0, 1)
-
+        Dim x = Word.Split(" ")
+        For Each item As String In x
+            TrieTree.InsertByWord(Word)
+            If Word.Length > item.Length + 1 = True Then
+                Word = Word.Remove(0, item.Length + 1)
+            Else
+                Word = ""
+            End If
         Next
         Return TrieTree
     End Function
     ''' <summary>
-    ''' AddIteratively
+    ''' AddIteratively characters
+    ''' CAT
+    ''' AT
+    ''' T
     ''' </summary>
     ''' <param name="Word"></param>
-    Public Function AddWord(ByRef Word As String) As TreeNode
+    Public Function AddItterativelyByWord(ByRef Word As String) As TreeNode
+        Return AddItterativelyByWord(Me, Word)
+    End Function
+    ''' <summary>
+    ''' Add characters Iteratively
+    ''' CAT
+    ''' AT
+    ''' T
+    ''' </summary>
+    ''' <param name="Word"></param>
+    ''' <param name="TrieTree"></param>
+    Public Function AddItterativelyByCharacter(TrieTree As TreeNode, ByRef Word As String) As TreeNode
+        'AddWord
+        For i = 1 To Word.Length
+            TrieTree.InsertByCharacters(Word)
+            Word = Word.Remove(0, 1)
+        Next
+        Return TrieTree
+    End Function
+    ''' <summary>
+    ''' AddIteratively characters
+    ''' CAT
+    ''' AT
+    ''' T
+    ''' </summary>
+    ''' <param name="Word"></param>
+    Public Function AddItterativelyByCharacter(ByRef Word As String) As TreeNode
+        Return AddItterativelyByCharacter(Me, Word)
+    End Function
+    ''' <summary>
+    ''' Inserts a string into the trie
+    ''' </summary>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Function InsertByWord(ByRef Str As String) As TreeNode
+        Return TreeNode.AddStringbyWord(Me, Str)
+    End Function
+    ''' <summary>
+    ''' Insert String into trie
+    ''' </summary>
+    ''' <param name="tree"></param>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Shared Function InsertByWord(ByRef tree As TreeNode, ByRef Str As String) As TreeNode
+        Return TreeNode.AddStringbyWord(tree, Str)
+    End Function
+    ''' <summary>
+    ''' Inserts a string into the trie
+    ''' </summary>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Function InsertByCharacters(ByRef Str As String) As TreeNode
+        Return TreeNode.AddStringbyChars(Me, Str)
+    End Function
+    ''' <summary>
+    ''' Insert String into trie
+    ''' </summary>
+    ''' <param name="tree"></param>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Shared Function InsertByCharacters(ByRef tree As TreeNode, ByRef Str As String) As TreeNode
+        Return TreeNode.AddStringbyChars(tree, Str)
+    End Function
+    ''' <summary>
+    ''' Adds string to given trie
+    ''' </summary>
+    ''' <param name="Tree"></param>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Shared Function AddStringbyChars(ByRef Tree As TreeNode, Str As String) As TreeNode
+        Dim curr As TreeNode = Tree
+        Dim Pos As Integer = 0
+        For Each chr As Char In Str
+            Pos += 1
+            curr = TreeNode.AddStringToTrie(curr, chr, Pos)
+        Next
+        curr = TreeNode.AddStringToTrie(curr, "StopChar", Pos + 1)
+        Return Tree
+    End Function
+    ''' <summary>
+    ''' Adds char to Node(children) Returning the child
+    ''' </summary>
+    ''' <param name="CurrentNode">node containing children</param>
+    ''' <param name="ChrStr">String to be added </param>
+    ''' <param name="CharPos">this denotes the level of the node</param>
+    ''' <returns></returns>
+    Private Shared Function AddStringToTrie(ByRef CurrentNode As TreeNode, ByRef ChrStr As String, ByRef CharPos As Integer) As TreeNode
+        'start of tree
+        Dim Text As String = ChrStr
+        Dim returnNode As New TreeNode
+        Dim NewNode As New TreeNode
+        'Goto first node
+        'does this node have siblings
+        If TreeNode.HasChildren(CurrentNode) = True Then
+            'Check children
+            If TreeNode.CheckNodeExists(CurrentNode.Children, ChrStr) = False Then
+                'create a new node for char
+                NewNode = TreeNode.CreateNode(ChrStr, CurrentNode.NodeLevel + 1)
+                NewNode.NodeLevel = CharPos
+                'Add childnode 
+                CurrentNode.Children.Add(NewNode)
+                returnNode = TreeNode.GetNode(CurrentNode.Children, ChrStr)
+            Else
+                returnNode = TreeNode.GetNode(CurrentNode.Children, ChrStr)
+            End If
 
-        Return AddWord(Me, Word)
+        Else
+            'If no silings then Create new node
+            'create a new node for char
+            NewNode = TreeNode.CreateNode(ChrStr, CurrentNode.NodeLevel + 1)
+            NewNode.NodeLevel = CharPos
+            'Add childnode 
+            CurrentNode.Children.Add(NewNode)
+            returnNode = TreeNode.GetNode(CurrentNode.Children, ChrStr)
+        End If
+
+        Return returnNode
+    End Function
+    ''' <summary>
+    ''' Adds string to given trie
+    ''' </summary>
+    ''' <param name="Tree"></param>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Shared Function AddStringbyWord(ByRef Tree As TreeNode, Str As String) As TreeNode
+        Dim curr As TreeNode = Tree
+        Dim Pos As Integer = 0
+        For Each chr As String In Str.Split(" ")
+            Pos += 1
+            curr = TreeNode.AddStringToTrie(curr, chr, Pos)
+        Next
+        curr = TreeNode.AddStringToTrie(curr, "StopChar", Pos + 1)
+        Return Tree
+    End Function
+#End Region
+#Region "DATA"
+    ''' <summary>
+    ''' Returns Number of Nodes
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Function NumberOfNodes(ByRef Tree As TreeNode) As Integer
+        Dim Count As Integer = 0
+        For Each child In Tree.Children
+            Count += child.NumberOfNodes
+        Next
+        Return Count
+    End Function
+    ''' <summary>
+    ''' Returns number of Nodes in tree
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function CountNodes(ByRef CurrentCount As Integer) As Integer
+        Dim count As Integer = CurrentCount
+        For Each child In Me.Children
+            count += 1
+            count = child.CountNodes(count)
+        Next
+        Return count
+    End Function
+    Public Function CountWords(ByRef CurrentCount As Integer) As Integer
+        Dim count As Integer = CurrentCount
+        For Each child In Me.Children
+            If child.NodeID = CharID.StopChar = True Then
+                count += 1
+
+            End If
+            count = child.CountWords(count)
+        Next
+
+        Return count
+    End Function
+    ''' <summary>
+    ''' Returns deepest level
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function LowestLevel() As Integer
+        'Gets the level for node
+        Dim Level As Integer = Me.NodeLevel
+
+        'Recurses children
+        For Each child In Me.Children
+            If Level < child.LowestLevel = True Then
+                Level = child.LowestLevel
+            End If
+        Next
+        'The loop should finish at the lowest level
+        Return Level
+    End Function
+    'Functions
+    ''' <summary>
+    ''' Returns Number of Nodes
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function NumberOfNodes() As Integer
+        Dim Count As Integer = 0
+        For Each child In Me.Children
+            Count += child.NumberOfNodes
+        Next
+        Return Count
+    End Function
+    ''' <summary>
+    ''' Checks if current node Has children
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function HasChildren() As Boolean
+        Return If(Me.Children.Count > 0 = True, True, False)
+    End Function
+    ''' <summary>
+    ''' Checks if given node has children 
+    ''' </summary>
+    ''' <param name="Node"></param>
+    ''' <returns></returns>
+    Private Shared Function HasChildren(ByRef Node As TreeNode) As Boolean
+        Return If(Node.Children.Count > 0 = True, True, False)
     End Function
     ''' <summary>
     ''' Each NodeID: is specific to Its level this id is generated by the tree:
@@ -136,47 +341,9 @@ Public Structure TreeNode
             Children = New List(Of TreeNode)
         Else
         End If
-
-
     End Sub
-
-    'Functions
-    ''' <summary>
-    ''' Returns Number of Nodes
-    ''' </summary>
-    ''' <returns></returns>
-    Public Function NumberOfNodes() As Integer
-        Dim Count As Integer = 0
-        For Each child In Me.Children
-            Count += child.NumberOfNodes
-        Next
-        Return Count
-    End Function
-    ''' <summary>
-    ''' Inserts a string into the trie
-    ''' </summary>
-    ''' <param name="Str"></param>
-    ''' <returns></returns>
-    Public Function Insert(ByRef Str As String) As TreeNode
-        Return TreeNode.AddString(Me, Str)
-    End Function
-    ''' <summary>
-    ''' Returns true if String is found as a prefix in trie
-    ''' </summary>
-    ''' <param name="Str"></param>
-    ''' <returns></returns>
-    Public Function FindPrefix(ByRef Str As String) As Boolean
-
-        Return TreeNode.CheckPrefix(Me, Str)
-    End Function
-    ''' <summary>
-    ''' Returns true if string is found as word in trie
-    ''' </summary>
-    ''' <param name="Str"></param>
-    ''' <returns></returns>
-    Public Function FindWord(ByRef Str As String) As Boolean
-        Return TreeNode.CheckWord(Me, Str)
-    End Function
+#End Region
+#Region "Create"
     ''' <summary>
     ''' Creates a Tree With an Empty Root node Called Root! Intializing the StartChar
     ''' </summary>
@@ -191,87 +358,6 @@ Public Structure TreeNode
         tree.NodeID = CharID.StartChar
         Return tree
     End Function
-
-    'Ext
-
-    ''' <summary>
-    ''' Returns true if string is contined in trie (prefix) not as Word
-    ''' </summary>
-    ''' <param name="tree"></param>
-    ''' <param name="Str"></param>
-    ''' <returns></returns>
-    Public Shared Function CheckPrefix(ByRef tree As TreeNode, ByRef Str As String) As Boolean
-        Dim CurrentNode As TreeNode = tree
-        Dim found As Boolean = False
-
-        Dim Pos As Integer = 0
-        For Each chrStr As Char In Str
-            Pos += 1
-
-
-            'Check Chars
-            If TreeNode.CheckNodeExists(CurrentNode.Children, chrStr) = True Then
-                CurrentNode = TreeNode.GetNode(CurrentNode.Children, chrStr)
-                found = True
-            Else
-                found = False
-            End If
-        Next
-        Return found
-    End Function
-    ''' <summary>
-    ''' Returns true if Word is found in trie
-    ''' </summary>
-    ''' <param name="tree"></param>
-    ''' <param name="Str"></param>
-    ''' <returns></returns>
-    Public Shared Function CheckWord(ByRef tree As TreeNode, ByRef Str As String) As Boolean
-        Dim CurrentNode As TreeNode = tree
-        Dim found As Boolean = False
-        'Position in Characterstr
-        Dim Pos As Integer = 0
-        For Each chrStr As Char In Str
-            Pos += 1
-
-
-            'Check Chars
-            If TreeNode.CheckNodeExists(CurrentNode.Children, chrStr) = True Then
-                CurrentNode = TreeNode.GetNode(CurrentNode.Children, chrStr)
-                found = True
-            Else
-                'Terminated before end of Word
-                found = False
-            End If
-        Next
-
-        'Check for end of word marker
-        Return If(found = True, TreeNode.CheckNodeExists(CurrentNode.Children, "StopChar") = True, False)
-
-
-
-    End Function
-    ''' <summary>
-    ''' Insert String into trie
-    ''' </summary>
-    ''' <param name="tree"></param>
-    ''' <param name="Str"></param>
-    ''' <returns></returns>
-    Public Shared Function Insert(ByRef tree As TreeNode, ByRef Str As String) As TreeNode
-        Return TreeNode.AddString(tree, Str)
-    End Function
-    ''' <summary>
-    ''' Returns Number of Nodes
-    ''' </summary>
-    ''' <returns></returns>
-    Public Shared Function NumberOfNodes(ByRef Tree As TreeNode) As Integer
-        Dim Count As Integer = 0
-        For Each child In Tree.Children
-            Count += child.NumberOfNodes
-        Next
-        Return Count
-    End Function
-    '----
-
     ''' <summary>
     ''' If node does not exist in child node set it is added 
     ''' if node already exists then no node is added a node ID is generated
@@ -352,28 +438,13 @@ Public Structure TreeNode
         End Select
         Return newnode.NodeID
     End Function
-    ''' <summary>
-    ''' Checks if node Has children
-    ''' </summary>
-    ''' <returns></returns>
-    Public Function HasChildren() As Boolean
-        Return If(Me.Children.Count > 0 = True, True, False)
-    End Function
-    ''' <summary>
-    ''' Checks if given node has children 
-    ''' </summary>
-    ''' <param name="Node"></param>
-    ''' <returns></returns>
-    Private Shared Function HasChildren(ByRef Node As TreeNode) As Boolean
-        Return If(Node.Children.Count > 0 = True, True, False)
-    End Function
+#End Region
+#Region "Display"
     ''' <summary>
     ''' Returns a TreeViewControl with the Contents of the Trie:
     ''' </summary>
     Public Function ToView(ByRef Node As TreeNode) As System.Windows.Forms.TreeNode
         Dim Nde As New System.Windows.Forms.TreeNode
-
-
         Nde.Text = Node.NodeData.ToString.ToUpper &
                 "(" & Node.NodeLevel & ")" & vbNewLine
 
@@ -440,6 +511,24 @@ Public Structure TreeNode
 
         Return Str
     End Function
+#End Region
+#Region "FIND"
+    ''' <summary>
+    ''' Returns true if String is found as a prefix in trie
+    ''' </summary>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Function FindPrefix(ByRef Str As String) As Boolean
+        Return TreeNode.CheckPrefix(Me, Str)
+    End Function
+    ''' <summary>
+    ''' Returns true if string is found as word in trie
+    ''' </summary>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Function FindWord(ByRef Str As String) As Boolean
+        Return TreeNode.CheckWord(Me, Str)
+    End Function
     ''' <summary>
     ''' checks if node exists in child nodes (used for trie trees (String added is the key and the data)
     ''' </summary>
@@ -455,47 +544,6 @@ Public Structure TreeNode
             End If
         Next
         Return found
-    End Function
-    ''' <summary>
-    ''' Adds char to Node(children) Returning the child
-    ''' </summary>
-    ''' <param name="CurrentNode">node containing children</param>
-    ''' <param name="ChrStr">String to be added </param>
-    ''' <param name="CharPos">this denotes the level of the node</param>
-    ''' <returns></returns>
-    Private Shared Function AddCharToTrie(ByRef CurrentNode As TreeNode, ByRef ChrStr As String, ByRef CharPos As Integer) As TreeNode
-        'start of tree
-
-        Dim Text As String = ChrStr
-        Dim returnNode As New TreeNode
-        Dim NewNode As New TreeNode
-        'Goto first node
-
-        'does this node have siblings
-        If TreeNode.HasChildren(CurrentNode) = True Then
-            'Check children
-            If TreeNode.CheckNodeExists(CurrentNode.Children, ChrStr) = False Then
-                'create a new node for char
-                NewNode = TreeNode.CreateNode(ChrStr, CurrentNode.NodeLevel + 1)
-                NewNode.NodeLevel = CharPos
-                'Add childnode 
-                CurrentNode.Children.Add(NewNode)
-                returnNode = TreeNode.GetNode(CurrentNode.Children, ChrStr)
-            Else
-                returnNode = TreeNode.GetNode(CurrentNode.Children, ChrStr)
-            End If
-
-        Else
-            'If no silings then Create new node
-            'create a new node for char
-            NewNode = TreeNode.CreateNode(ChrStr, CurrentNode.NodeLevel + 1)
-            NewNode.NodeLevel = CharPos
-            'Add childnode 
-            CurrentNode.Children.Add(NewNode)
-            returnNode = TreeNode.GetNode(CurrentNode.Children, ChrStr)
-        End If
-
-        Return returnNode
     End Function
     ''' <summary>
     ''' Returns Matched Node to sender (used to recures children)
@@ -514,67 +562,62 @@ Public Structure TreeNode
         Return Foundnode
     End Function
     ''' <summary>
-    ''' Adds string to given trie
+    ''' Returns true if string is contined in trie (prefix) not as Word
     ''' </summary>
-    ''' <param name="Tree"></param>
+    ''' <param name="tree"></param>
     ''' <param name="Str"></param>
     ''' <returns></returns>
-    Public Shared Function AddString(ByRef Tree As TreeNode, Str As String) As TreeNode
-        Dim curr As TreeNode = Tree
+    Public Shared Function CheckPrefix(ByRef tree As TreeNode, ByRef Str As String) As Boolean
+        Dim CurrentNode As TreeNode = tree
+        Dim found As Boolean = False
+
         Dim Pos As Integer = 0
-        For Each chr As Char In Str
+        For Each chrStr As Char In Str
             Pos += 1
-            curr = TreeNode.AddCharToTrie(curr, chr, Pos)
-        Next
-        curr = TreeNode.AddCharToTrie(curr, "StopChar", Pos + 1)
-        Return Tree
-    End Function
-    ''' <summary>
-    ''' Returns number of Nodes in tree
-    ''' </summary>
-    ''' <returns></returns>
-    Public Function CountNodes(ByRef CurrentCount As Integer) As Integer
 
 
-        Dim count As Integer = CurrentCount
-        For Each child In Me.Children
-
-            count += 1
-
-            count = child.CountNodes(count)
-        Next
-
-        Return count
-    End Function
-    ''' <summary>
-    ''' Returns deepest level
-    ''' </summary>
-    ''' <returns></returns>
-    Public Function LowestLevel() As Integer
-        'Gets the level for node
-        Dim Level As Integer = Me.NodeLevel
-
-        'Recurses children
-        For Each child In Me.Children
-            If Level < child.LowestLevel = True Then
-                Level = child.LowestLevel
+            'Check Chars
+            If TreeNode.CheckNodeExists(CurrentNode.Children, chrStr) = True Then
+                CurrentNode = TreeNode.GetNode(CurrentNode.Children, chrStr)
+                found = True
+            Else
+                found = False
             End If
         Next
-        'The loop should finish at the lowest level
-        Return Level
+        Return found
     End Function
-    Public Function CountWords(ByRef CurrentCount As Integer) As Integer
-        Dim count As Integer = CurrentCount
-        For Each child In Me.Children
-            If child.NodeID = CharID.StopChar = True Then
-                count += 1
+    ''' <summary>
+    ''' Returns true if Word is found in trie
+    ''' </summary>
+    ''' <param name="tree"></param>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Shared Function CheckWord(ByRef tree As TreeNode, ByRef Str As String) As Boolean
+        Dim CurrentNode As TreeNode = tree
+        Dim found As Boolean = False
+        'Position in Characterstr
+        Dim Pos As Integer = 0
+        For Each chrStr As Char In Str
+            Pos += 1
 
+
+            'Check Chars
+            If TreeNode.CheckNodeExists(CurrentNode.Children, chrStr) = True Then
+                CurrentNode = TreeNode.GetNode(CurrentNode.Children, chrStr)
+                found = True
+            Else
+                'Terminated before end of Word
+                found = False
             End If
-            count = child.CountWords(count)
         Next
 
-        Return count
+        'Check for end of word marker
+        Return If(found = True, TreeNode.CheckNodeExists(CurrentNode.Children, "StopChar") = True, False)
+
+
+
     End Function
+#End Region
 End Structure
 ''' <summary>
 ''' All nodes in a binary Tree have Left and Right nodes Nodes are added to the end of the

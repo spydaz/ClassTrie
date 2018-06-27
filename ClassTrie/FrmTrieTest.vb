@@ -5,7 +5,7 @@ Public Class FrmTrieTest
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         TreeView1.Nodes.Clear()
-        MyTree.Insert(TextBox2.Text)
+        MyTree.InsertByCharacters(TextBox2.Text)
         TextBox1.AppendText("Added : " & TextBox2.Text.ToUpper & vbNewLine)
         TreeView1.Nodes.Add(MyTree.ToView())
         TextBox2.Clear()
@@ -43,7 +43,7 @@ Public Class FrmTrieTest
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         TreeView1.Nodes.Clear()
-        MyTree.AddWord(TextBox2.Text)
+        MyTree.AddItterativelyByCharacter(TextBox2.Text)
 
         TextBox1.AppendText("Added iteratively : " & TextBox2.Text.ToUpper & vbNewLine)
         TreeView1.Nodes.Clear()
@@ -52,4 +52,25 @@ Public Class FrmTrieTest
 
         TextBox2.Clear()
     End Sub
+
+    Private Sub ButtonAddSentence_Click(sender As Object, e As EventArgs) Handles ButtonAddSentence.Click
+        TreeView1.Nodes.Clear()
+        MyTree.InsertByWord(TextBox2.Text)
+        TextBox1.AppendText("Added : " & TextBox2.Text.ToUpper & vbNewLine)
+        TreeView1.Nodes.Add(MyTree.ToView())
+        TextBox2.Clear()
+    End Sub
+
+    Private Sub ButtonAddSentenceItteratively_Click(sender As Object, e As EventArgs) Handles ButtonAddSentenceItteratively.Click
+        TreeView1.Nodes.Clear()
+        MyTree.AddItterativelyByWord(TextBox2.Text)
+
+        TextBox1.AppendText("Added iteratively : " & TextBox2.Text.ToUpper & vbNewLine)
+        TreeView1.Nodes.Clear()
+        TreeView1.Nodes.Add(MyTree.ToView())
+
+
+        TextBox2.Clear()
+    End Sub
+
 End Class

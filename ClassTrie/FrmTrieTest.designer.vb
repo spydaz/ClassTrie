@@ -28,6 +28,8 @@ Partial Class FrmTrieTest
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTrieTest))
         Me.TreeView1 = New System.Windows.Forms.TreeView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ButtonAddSentenceItteratively = New System.Windows.Forms.Button()
+        Me.ButtonAddSentence = New System.Windows.Forms.Button()
         Me.ButtonCountWords = New System.Windows.Forms.Button()
         Me.ButtonDepth = New System.Windows.Forms.Button()
         Me.ButtonTotal = New System.Windows.Forms.Button()
@@ -58,6 +60,8 @@ Partial Class FrmTrieTest
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.Navy
+        Me.GroupBox1.Controls.Add(Me.ButtonAddSentenceItteratively)
+        Me.GroupBox1.Controls.Add(Me.ButtonAddSentence)
         Me.GroupBox1.Controls.Add(Me.ButtonCountWords)
         Me.GroupBox1.Controls.Add(Me.ButtonDepth)
         Me.GroupBox1.Controls.Add(Me.ButtonTotal)
@@ -78,10 +82,32 @@ Partial Class FrmTrieTest
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Info"
         '
+        'ButtonAddSentenceItteratively
+        '
+        Me.ButtonAddSentenceItteratively.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.ButtonAddSentenceItteratively.Location = New System.Drawing.Point(970, 263)
+        Me.ButtonAddSentenceItteratively.Name = "ButtonAddSentenceItteratively"
+        Me.ButtonAddSentenceItteratively.Size = New System.Drawing.Size(94, 48)
+        Me.ButtonAddSentenceItteratively.TabIndex = 10
+        Me.ButtonAddSentenceItteratively.Text = "Add Sentence"
+        Me.ToolTip1.SetToolTip(Me.ButtonAddSentenceItteratively, "Add Sentence by Word Iteratively")
+        Me.ButtonAddSentenceItteratively.UseVisualStyleBackColor = False
+        '
+        'ButtonAddSentence
+        '
+        Me.ButtonAddSentence.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.ButtonAddSentence.Location = New System.Drawing.Point(870, 264)
+        Me.ButtonAddSentence.Name = "ButtonAddSentence"
+        Me.ButtonAddSentence.Size = New System.Drawing.Size(94, 48)
+        Me.ButtonAddSentence.TabIndex = 10
+        Me.ButtonAddSentence.Text = "Add Sentence"
+        Me.ToolTip1.SetToolTip(Me.ButtonAddSentence, "Adds Words Form Sentence")
+        Me.ButtonAddSentence.UseVisualStyleBackColor = False
+        '
         'ButtonCountWords
         '
         Me.ButtonCountWords.BackColor = System.Drawing.Color.LightSlateGray
-        Me.ButtonCountWords.Location = New System.Drawing.Point(703, 263)
+        Me.ButtonCountWords.Location = New System.Drawing.Point(661, 263)
         Me.ButtonCountWords.Name = "ButtonCountWords"
         Me.ButtonCountWords.Size = New System.Drawing.Size(110, 33)
         Me.ButtonCountWords.TabIndex = 9
@@ -92,7 +118,7 @@ Partial Class FrmTrieTest
         'ButtonDepth
         '
         Me.ButtonDepth.BackColor = System.Drawing.Color.LightSlateGray
-        Me.ButtonDepth.Location = New System.Drawing.Point(819, 263)
+        Me.ButtonDepth.Location = New System.Drawing.Point(786, 263)
         Me.ButtonDepth.Name = "ButtonDepth"
         Me.ButtonDepth.Size = New System.Drawing.Size(75, 33)
         Me.ButtonDepth.TabIndex = 8
@@ -103,7 +129,7 @@ Partial Class FrmTrieTest
         'ButtonTotal
         '
         Me.ButtonTotal.BackColor = System.Drawing.Color.LightSlateGray
-        Me.ButtonTotal.Location = New System.Drawing.Point(622, 263)
+        Me.ButtonTotal.Location = New System.Drawing.Point(546, 263)
         Me.ButtonTotal.Name = "ButtonTotal"
         Me.ButtonTotal.Size = New System.Drawing.Size(75, 33)
         Me.ButtonTotal.TabIndex = 7
@@ -220,4 +246,6 @@ Partial Class FrmTrieTest
     Friend WithEvents ButtonCountWords As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents ButtonAddSentence As Button
+    Friend WithEvents ButtonAddSentenceItteratively As Button
 End Class
