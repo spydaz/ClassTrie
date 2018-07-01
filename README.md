@@ -12,8 +12,57 @@ This method will be further extended to handle numerical inserts as well as DATA
 I was searching for a method to combine various conversation trees; into a single tree; 
 
 This will be it!
+# The Trie "TRY"Tree #
 
-## WORKING!!
+The word trie is an inflix of the word “retrieval”, because the trie can find a single word in a dictionary with only a prefix of the word.
+
+The Trie Tree is a very straight forward data structure. It is a simple tree where the nodes have an alphabet associated with them. It is sometimes called a "Prefix tree" / "Suffix tree" .... 
+
+By structuring the nodes in a particular way, words or strings can be retrieved from the structure by traversing down a branch path of the tree.
+
+_ Currently Tries are used for Storing "Characters" within a String... Although these does not need to be the case; Sentences can also be stored (Each Word in a Node) ; Paragraphs can be Stored (Sentences in every node) ; Even Structured Data can be stored in a Trie tree. (using the NODES as Addresses, Data stored in the Final node); _
+
+![Trie Tree Example](https://i1.wp.com/theoryofprogramming.com/wp-content/uploads/2015/06/trie12.jpg)
+
+This offering Attempts to cater for all paradigms ; Noticeably the differences are only measured by the Insertion / Search / Deletion Process. 
+
+**### For advanced Search capabilities data can be added iteratively. ###**
+For a single word of Three letters (3 insertions)
+Cat > at > T 
+
+This allows for all suffix and Prefixes to be stored in the Tree. 
+A Marker is used to Mark the end of a String Entry... 
+
+_CAT(StopChar)_
+_AT(StopChar)_
+_T(StopChar)_
+
+Where as if a single Insertion is used 
+
+_CAT(StopChar) Cat / Ca / C  <<<< Maybe found > But!_
+_At / T <<<< Cannot_
+
+Carpet <contains prefix > Car < But cannot Find Suffix > Pet < 
+
+
+## Common functions are ;
+
+_**Find Prefix **_
+
+_**Find Suffix *_
+
+_**Count Nodes **_
+
+_**Deepest Node **_
+
+_**Add(by character) > As Single / Iteratively**_
+
+_**Add(by Word) > As Single / Iteratively**_
+
+_**Add(by Sentence) > As Single / Iteratively**_
+
+***UPDATES *** 
+## WORKING!! ##
 
 **Insert function;**
 
