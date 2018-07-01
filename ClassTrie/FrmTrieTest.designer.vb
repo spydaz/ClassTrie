@@ -28,6 +28,8 @@ Partial Class FrmTrieTest
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTrieTest))
         Me.TreeView1 = New System.Windows.Forms.TreeView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.ButtonAddSentenceItteratively = New System.Windows.Forms.Button()
         Me.ButtonAddSentence = New System.Windows.Forms.Button()
         Me.ButtonCountWords = New System.Windows.Forms.Button()
@@ -47,19 +49,21 @@ Partial Class FrmTrieTest
         'TreeView1
         '
         Me.TreeView1.BackColor = System.Drawing.SystemColors.Info
-        Me.TreeView1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.TreeView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TreeView1.Font = New System.Drawing.Font("Comic Sans MS", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TreeView1.LineColor = System.Drawing.Color.Navy
         Me.TreeView1.Location = New System.Drawing.Point(0, 0)
         Me.TreeView1.Name = "TreeView1"
         Me.TreeView1.ShowNodeToolTips = True
-        Me.TreeView1.Size = New System.Drawing.Size(1176, 293)
+        Me.TreeView1.Size = New System.Drawing.Size(1518, 807)
         Me.TreeView1.TabIndex = 3
         Me.ToolTip1.SetToolTip(Me.TreeView1, "Suffix Trie")
         '
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.Navy
+        Me.GroupBox1.Controls.Add(Me.Button7)
+        Me.GroupBox1.Controls.Add(Me.Button6)
         Me.GroupBox1.Controls.Add(Me.ButtonAddSentenceItteratively)
         Me.GroupBox1.Controls.Add(Me.ButtonAddSentence)
         Me.GroupBox1.Controls.Add(Me.ButtonCountWords)
@@ -75,30 +79,58 @@ Partial Class FrmTrieTest
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.Color.White
-        Me.GroupBox1.Location = New System.Drawing.Point(0, 299)
+        Me.GroupBox1.Location = New System.Drawing.Point(0, 421)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1176, 351)
+        Me.GroupBox1.Size = New System.Drawing.Size(1518, 386)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Info"
         '
+        'Button7
+        '
+        Me.Button7.AutoEllipsis = True
+        Me.Button7.BackColor = System.Drawing.Color.Firebrick
+        Me.Button7.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button7.Location = New System.Drawing.Point(630, 261)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(180, 35)
+        Me.Button7.TabIndex = 12
+        Me.Button7.Text = "Find Sentence"
+        Me.Button7.UseVisualStyleBackColor = False
+        '
+        'Button6
+        '
+        Me.Button6.AutoEllipsis = True
+        Me.Button6.BackColor = System.Drawing.Color.Firebrick
+        Me.Button6.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button6.Location = New System.Drawing.Point(630, 302)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(180, 40)
+        Me.Button6.TabIndex = 11
+        Me.Button6.Text = "Find Sentence Prefix"
+        Me.Button6.UseVisualStyleBackColor = False
+        '
         'ButtonAddSentenceItteratively
         '
+        Me.ButtonAddSentenceItteratively.AutoEllipsis = True
         Me.ButtonAddSentenceItteratively.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.ButtonAddSentenceItteratively.Location = New System.Drawing.Point(970, 263)
+        Me.ButtonAddSentenceItteratively.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonAddSentenceItteratively.Location = New System.Drawing.Point(816, 302)
         Me.ButtonAddSentenceItteratively.Name = "ButtonAddSentenceItteratively"
-        Me.ButtonAddSentenceItteratively.Size = New System.Drawing.Size(94, 48)
+        Me.ButtonAddSentenceItteratively.Size = New System.Drawing.Size(216, 40)
         Me.ButtonAddSentenceItteratively.TabIndex = 10
-        Me.ButtonAddSentenceItteratively.Text = "Add Sentence"
+        Me.ButtonAddSentenceItteratively.Text = "Add Sentence Iteratively"
         Me.ToolTip1.SetToolTip(Me.ButtonAddSentenceItteratively, "Add Sentence by Word Iteratively")
         Me.ButtonAddSentenceItteratively.UseVisualStyleBackColor = False
         '
         'ButtonAddSentence
         '
+        Me.ButtonAddSentence.AutoEllipsis = True
         Me.ButtonAddSentence.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.ButtonAddSentence.Location = New System.Drawing.Point(870, 264)
+        Me.ButtonAddSentence.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonAddSentence.Location = New System.Drawing.Point(816, 261)
         Me.ButtonAddSentence.Name = "ButtonAddSentence"
-        Me.ButtonAddSentence.Size = New System.Drawing.Size(94, 48)
+        Me.ButtonAddSentence.Size = New System.Drawing.Size(216, 35)
         Me.ButtonAddSentence.TabIndex = 10
         Me.ButtonAddSentence.Text = "Add Sentence"
         Me.ToolTip1.SetToolTip(Me.ButtonAddSentence, "Adds Words Form Sentence")
@@ -106,8 +138,10 @@ Partial Class FrmTrieTest
         '
         'ButtonCountWords
         '
-        Me.ButtonCountWords.BackColor = System.Drawing.Color.LightSlateGray
-        Me.ButtonCountWords.Location = New System.Drawing.Point(661, 263)
+        Me.ButtonCountWords.AutoEllipsis = True
+        Me.ButtonCountWords.BackColor = System.Drawing.Color.Teal
+        Me.ButtonCountWords.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonCountWords.Location = New System.Drawing.Point(400, 262)
         Me.ButtonCountWords.Name = "ButtonCountWords"
         Me.ButtonCountWords.Size = New System.Drawing.Size(110, 33)
         Me.ButtonCountWords.TabIndex = 9
@@ -117,8 +151,10 @@ Partial Class FrmTrieTest
         '
         'ButtonDepth
         '
-        Me.ButtonDepth.BackColor = System.Drawing.Color.LightSlateGray
-        Me.ButtonDepth.Location = New System.Drawing.Point(786, 263)
+        Me.ButtonDepth.AutoEllipsis = True
+        Me.ButtonDepth.BackColor = System.Drawing.Color.Teal
+        Me.ButtonDepth.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonDepth.Location = New System.Drawing.Point(516, 261)
         Me.ButtonDepth.Name = "ButtonDepth"
         Me.ButtonDepth.Size = New System.Drawing.Size(75, 33)
         Me.ButtonDepth.TabIndex = 8
@@ -128,18 +164,22 @@ Partial Class FrmTrieTest
         '
         'ButtonTotal
         '
-        Me.ButtonTotal.BackColor = System.Drawing.Color.LightSlateGray
-        Me.ButtonTotal.Location = New System.Drawing.Point(546, 263)
+        Me.ButtonTotal.AutoEllipsis = True
+        Me.ButtonTotal.BackColor = System.Drawing.Color.Teal
+        Me.ButtonTotal.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonTotal.Location = New System.Drawing.Point(400, 302)
         Me.ButtonTotal.Name = "ButtonTotal"
-        Me.ButtonTotal.Size = New System.Drawing.Size(75, 33)
+        Me.ButtonTotal.Size = New System.Drawing.Size(110, 34)
         Me.ButtonTotal.TabIndex = 7
-        Me.ButtonTotal.Text = "Nodes"
+        Me.ButtonTotal.Text = "Node Count"
         Me.ToolTip1.SetToolTip(Me.ButtonTotal, "Counts total odes in tree")
         Me.ButtonTotal.UseVisualStyleBackColor = False
         '
         'Button3
         '
+        Me.Button3.AutoEllipsis = True
         Me.Button3.BackColor = System.Drawing.Color.LightSlateGray
+        Me.Button3.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button3.Location = New System.Drawing.Point(143, 263)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(125, 33)
@@ -150,7 +190,9 @@ Partial Class FrmTrieTest
         '
         'Button4
         '
+        Me.Button4.AutoEllipsis = True
         Me.Button4.BackColor = System.Drawing.Color.LightSlateGray
+        Me.Button4.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button4.Location = New System.Drawing.Point(12, 263)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(125, 33)
@@ -163,9 +205,9 @@ Partial Class FrmTrieTest
         '
         Me.TextBox2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(3, 318)
+        Me.TextBox2.Location = New System.Drawing.Point(3, 353)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(1170, 30)
+        Me.TextBox2.Size = New System.Drawing.Size(1512, 30)
         Me.TextBox2.TabIndex = 3
         Me.ToolTip1.SetToolTip(Me.TextBox2, "Interactive text window")
         '
@@ -179,14 +221,16 @@ Partial Class FrmTrieTest
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox1.Size = New System.Drawing.Size(1170, 237)
+        Me.TextBox1.Size = New System.Drawing.Size(1512, 237)
         Me.TextBox1.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.TextBox1, "Interactive display")
         '
         'Button2
         '
+        Me.Button2.AutoEllipsis = True
         Me.Button2.BackColor = System.Drawing.Color.LightSlateGray
-        Me.Button2.Location = New System.Drawing.Point(1091, 283)
+        Me.Button2.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(1038, 264)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(73, 29)
         Me.Button2.TabIndex = 4
@@ -196,21 +240,25 @@ Partial Class FrmTrieTest
         '
         'Button5
         '
+        Me.Button5.AutoEllipsis = True
         Me.Button5.BackColor = System.Drawing.Color.LightSlateGray
-        Me.Button5.Location = New System.Drawing.Point(407, 263)
+        Me.Button5.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button5.Location = New System.Drawing.Point(143, 302)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(125, 33)
+        Me.Button5.Size = New System.Drawing.Size(178, 34)
         Me.Button5.TabIndex = 3
-        Me.Button5.Text = "Add Word"
+        Me.Button5.Text = "Add Word Iteratively"
         Me.ToolTip1.SetToolTip(Me.Button5, "Adds word as suffix tree")
         Me.Button5.UseVisualStyleBackColor = False
         '
         'Button1
         '
+        Me.Button1.AutoEllipsis = True
         Me.Button1.BackColor = System.Drawing.Color.LightSlateGray
-        Me.Button1.Location = New System.Drawing.Point(274, 263)
+        Me.Button1.Font = New System.Drawing.Font("Comic Sans MS", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(12, 302)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(125, 33)
+        Me.Button1.Size = New System.Drawing.Size(125, 34)
         Me.Button1.TabIndex = 3
         Me.Button1.Text = "Add Word"
         Me.ToolTip1.SetToolTip(Me.Button1, "Add a single word into the tree")
@@ -221,7 +269,7 @@ Partial Class FrmTrieTest
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(1176, 650)
+        Me.ClientSize = New System.Drawing.Size(1518, 807)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.TreeView1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -248,4 +296,6 @@ Partial Class FrmTrieTest
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents ButtonAddSentence As Button
     Friend WithEvents ButtonAddSentenceItteratively As Button
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button6 As Button
 End Class

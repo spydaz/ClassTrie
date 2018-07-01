@@ -1,4 +1,4 @@
-﻿
+﻿Imports AI_TOOLS.Tools
 
 Public Class FrmTrieTest
     Dim MyTree As New TreeNode
@@ -63,14 +63,19 @@ Public Class FrmTrieTest
 
     Private Sub ButtonAddSentenceItteratively_Click(sender As Object, e As EventArgs) Handles ButtonAddSentenceItteratively.Click
         TreeView1.Nodes.Clear()
-        MyTree.AddItterativelyByWord(TextBox2.Text)
-
         TextBox1.AppendText("Added iteratively : " & TextBox2.Text.ToUpper & vbNewLine)
+        MyTree.AddItterativelyByWord(TextBox2.Text)
         TreeView1.Nodes.Clear()
         TreeView1.Nodes.Add(MyTree.ToView())
-
-
         TextBox2.Clear()
     End Sub
 
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        TextBox1.AppendText(TextBox2.Text & ": " & MyTree.FindSentPrefix(TextBox2.Text) & vbNewLine)
+
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        TextBox1.AppendText(TextBox2.Text & ": " & MyTree.FindSentence(TextBox2.Text) & vbNewLine)
+    End Sub
 End Class

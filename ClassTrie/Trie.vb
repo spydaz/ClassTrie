@@ -12,6 +12,18 @@
 ''' Strings inserted with the insert Cmd will be treated as a Trie Tree insert! 
 ''' if this tree requires data to be stroed it needs to be stored inside the dataStorae locations
 ''' </summary>
+'Tree Extensions
+''' <summary>
+''' A Tree is actually a List of Lists
+''' Root with branches and leaves:
+''' In this tree the children are the branches: Locations to hold data have been provided.
+''' These ae not part of the Tree Structure: 
+''' When initializing the structure Its also prudent to Initialize the ChildList; 
+''' Reducing errors; Due to late initialization of the ChildList
+''' Subsequentially : Lists used in this class are not initialized in this structure. 
+''' Strings inserted with the insert Cmd will be treated as a Trie Tree insert! 
+''' if this tree requires data to be stroed it needs to be stored inside the dataStorae locations
+''' </summary>
 Public Structure TreeNode
     ''' <summary>
     ''' Each Set of Nodes has only 26 ID's ID 0 = stop
@@ -530,6 +542,22 @@ Public Structure TreeNode
         Return TreeNode.CheckWord(Me, Str)
     End Function
     ''' <summary>
+    ''' Returns true if String is found as a prefix in trie
+    ''' </summary>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Function FindSentPrefix(ByRef Str As String) As Boolean
+        Return TreeNode.CheckSentPrefix(Me, Str)
+    End Function
+    ''' <summary>
+    ''' Returns true if string is found as word in trie
+    ''' </summary>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Function FindSentence(ByRef Str As String) As Boolean
+        Return TreeNode.CheckSentence(Me, Str)
+    End Function
+    ''' <summary>
     ''' checks if node exists in child nodes (used for trie trees (String added is the key and the data)
     ''' </summary>
     ''' <param name="Nodedata">Char string used as identifier</param>
@@ -568,6 +596,7 @@ Public Structure TreeNode
     ''' <param name="Str"></param>
     ''' <returns></returns>
     Public Shared Function CheckPrefix(ByRef tree As TreeNode, ByRef Str As String) As Boolean
+        Str = Str.ToUpper
         Dim CurrentNode As TreeNode = tree
         Dim found As Boolean = False
 
@@ -593,11 +622,69 @@ Public Structure TreeNode
     ''' <param name="Str"></param>
     ''' <returns></returns>
     Public Shared Function CheckWord(ByRef tree As TreeNode, ByRef Str As String) As Boolean
+        Str = Str.ToUpper
         Dim CurrentNode As TreeNode = tree
         Dim found As Boolean = False
         'Position in Characterstr
         Dim Pos As Integer = 0
         For Each chrStr As Char In Str
+            Pos += 1
+
+
+            'Check Chars
+            If TreeNode.CheckNodeExists(CurrentNode.Children, chrStr) = True Then
+                CurrentNode = TreeNode.GetNode(CurrentNode.Children, chrStr)
+                found = True
+            Else
+                'Terminated before end of Word
+                found = False
+            End If
+        Next
+
+        'Check for end of word marker
+        Return If(found = True, TreeNode.CheckNodeExists(CurrentNode.Children, "StopChar") = True, False)
+
+
+
+    End Function
+    ''' <summary>
+    ''' Returns true if string is contined in trie (prefix) not as Word
+    ''' </summary>
+    ''' <param name="tree"></param>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Shared Function CheckSentPrefix(ByRef tree As TreeNode, ByRef Str As String) As Boolean
+        Dim CurrentNode As TreeNode = tree
+        Dim found As Boolean = False
+        Str = Str.ToUpper
+        Dim Pos As Integer = 0
+        For Each chrStr As String In Str.Split(" ")
+            Pos += 1
+
+
+            'Check Chars
+            If TreeNode.CheckNodeExists(CurrentNode.Children, chrStr) = True Then
+                CurrentNode = TreeNode.GetNode(CurrentNode.Children, chrStr)
+                found = True
+            Else
+                found = False
+            End If
+        Next
+        Return found
+    End Function
+    ''' <summary>
+    ''' Returns true if Word is found in trie
+    ''' </summary>
+    ''' <param name="tree"></param>
+    ''' <param name="Str"></param>
+    ''' <returns></returns>
+    Public Shared Function CheckSentence(ByRef tree As TreeNode, ByRef Str As String) As Boolean
+        Str = Str.ToUpper
+        Dim CurrentNode As TreeNode = tree
+        Dim found As Boolean = False
+        'Position in Characterstr
+        Dim Pos As Integer = 0
+        For Each chrStr As String In Str.Split(" ")
             Pos += 1
 
 
